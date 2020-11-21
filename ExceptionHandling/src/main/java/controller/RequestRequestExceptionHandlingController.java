@@ -1,7 +1,6 @@
 package controller;
 
 import model.User;
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +16,7 @@ public class RequestRequestExceptionHandlingController {
         user.setId(1L);
         user.setName("Habib");
         if (user.getId().equals(1L)) {
-            throw new ServiceException("oops this user is invalid");
+            throw new IllegalStateException("oops this user is invalid");
         }
         return "this method is first request";
     }

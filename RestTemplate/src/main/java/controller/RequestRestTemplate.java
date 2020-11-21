@@ -27,7 +27,7 @@ public class RequestRestTemplate {
     }
 
     @GetMapping("/clientRequest")
-    public String clientRequest() throws JsonProcessingException {
+    public String clientRequest() {
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://localhost:8091/serverRequest";
         User user = User.builder()

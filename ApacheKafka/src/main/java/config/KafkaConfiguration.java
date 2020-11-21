@@ -22,32 +22,35 @@ import java.util.Map;
 @EnableKafka
 public class KafkaConfiguration {
     @Bean
-    public ProducerFactory<String ,Object> producerFactory(){
-        Map<String,Object> prop=new HashMap<String,Object>();
-        prop.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"localhost:9092");
+    public ProducerFactory<String, Object> producerFactory() {
+        Map<String, Object> prop = new HashMap<>();
+        prop.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         prop.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         prop.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 
-        return new DefaultKafkaProducerFactory<String,Object>(prop);
+        return new DefaultKafkaProducerFactory<>(prop);
     }
-    @Bean
-    public KafkaTemplate<String,Object> kafkaTemplate(){
-        return new KafkaTemplate<String,Object>(producerFactory());
-    }
-    @Bean
-    public ConsumerFactory<String,Object> consumerFactory(){
 
-        Map<String,Object> prop=new HashMap<String,Object>();
-        prop.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"localhost:9092");
-        prop.put(ConsumerConfig.GROUP_ID_CONFIG,"group_id");
+    @Bean
+    public KafkaTemplate<String, Object> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
+    }
+
+    @Bean
+    public ConsumerFactory<String, Object> consumerFactory() {
+
+        Map<String, Object> prop = new HashMap<>();
+        prop.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        prop.put(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
         prop.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         prop.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
 
-        return new DefaultKafkaConsumerFactory<String,Object>(prop);
+        return new DefaultKafkaConsumerFactory<>(prop);
     }
+
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String,Object> kafkaListenerContainerFactory(){
-        ConcurrentKafkaListenerContainerFactory<String,Object> factory=new ConcurrentKafkaListenerContainerFactory<String,Object>();
+    public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<String, Object>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
     }
