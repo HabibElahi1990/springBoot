@@ -12,7 +12,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @ToString
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
     private Long id;
