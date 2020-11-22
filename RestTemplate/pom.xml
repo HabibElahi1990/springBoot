@@ -8,7 +8,6 @@
         <artifactId>springboot</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>springframwork</groupId>
     <artifactId>RestTemplate</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
